@@ -1,0 +1,38 @@
+
+.btn-secondary{
+  font-family: Montserrat-Bold;
+  background-color:lightgray;
+  border: none;
+  color: white;
+  border-radius:25px;
+  padding: 10px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  margin-top: 13px;
+  cursor: pointer;
+}
+.passwordIcon{
+    position: absolute;
+    top: 13px;
+    left: 35px;
+    height: 50px;
+    
+}
+.loginhere{
+    color: #555;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 5px
+}
+.loginhere-link{
+    font-weight: 700;
+    color: #222;
+    &:hover {
+       color:#57b846;
+      }
+      text-decoration: none;
+}

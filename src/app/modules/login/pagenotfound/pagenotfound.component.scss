@@ -1,0 +1,23 @@
+.heading{
+    text-align:center;
+}
+.pagenotfound{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+   max-width: 30%;
+
+}
+@media (max-width: 576px) {
+.errorimage{
+   display: block !important;
+   width:100%;
+}
+}
+@media screen and (max-width:768px)
+{
+  .pagenotfound{
+      max-width: 300px;
+  } 
+}

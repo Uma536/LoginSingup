@@ -1,0 +1,75 @@
+<div class="limiter">
+<div class="container">
+    <div class="login-card">
+        <div class="login-image">
+            <img src="assets/loginimage.png">
+        </div>
+<form [formGroup]="registerForm" class="login-form" (ngSubmit)="onSubmit()">
+<span class="login-form-title">
+        User Registration
+        </span>
+    <div class="form-fields">
+        <input type="text" formControlName="firstName" class="inputname" placeholder="FirstName" [ngClass]="{ 'is-invalid': submitted && formValue.firstName.errors }" />
+        <span class="focus-inputname"></span>
+        <span class="symbol-inputname">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </span>
+        <div *ngIf="submitted && formValue.firstName.errors" class="invalid-feedback">
+            <div *ngIf="formValue.firstName.errors.required || formValue.firstName.errors.pattern">FirstName should be valid</div>
+        </div>
+    </div> 
+    <div class="form-fields">
+        <input type="text" formControlName="lastName" class="inputname" placeholder="LastName" [ngClass]="{ 'is-invalid': submitted && formValue.lastName.errors }" />
+        <span class="focus-inputname"></span>
+        <span class="symbol-inputname">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </span>
+        <div *ngIf="submitted && formValue.lastName.errors" class="invalid-feedback">
+            <div *ngIf="formValue.lastName.errors.required || formValue.lastName.errors.pattern">LastName should be valid</div>
+
+        </div>
+    </div>
+    <div class="form-fields">
+        <input type="text" formControlName="email" class="inputname" placeholder="Email" [ngClass]="{ 'is-invalid': submitted && formValue.email.errors }" />
+        <span class="focus-inputname"></span>
+        <span class="symbol-inputname">
+            <mat-icon aria-hidden="false">email</mat-icon>
+        </span>
+        <div *ngIf="submitted && formValue.email.errors" class="invalid-feedback">
+            <div *ngIf="formValue.email.errors.required || formValue.email.errors.email">Email must be a valid email address</div>
+        </div>
+    </div>
+    <div class="form-fields">
+        <input type="text" formControlName="username" class="inputname" placeholder="Username" [ngClass]="{ 'is-invalid': submitted && formValue.username.errors }" />
+        <span class="focus-inputname"></span>
+        <span class="symbol-inputname">
+            <mat-icon aria-hidden="false">account_circle</mat-icon>
+        </span>
+        <div *ngIf="submitted && formValue.username.errors" class="invalid-feedback">
+            <div *ngIf="formValue.username.errors.required">Username is required</div>
+            <div *ngIf="formValue.username.errors.minlength">Username should be atleast 4 characters</div>
+
+        </div>
+    </div>
+    <div class="form-fields">
+        <input formControlName="password" class="inputname" placeholder="Password" [type]="hide ? 'password' : 'text'" [ngClass]="{ 'is-invalid': submitted && formValue.password.errors }" />
+        <span class="focus-inputname"></span>   
+        <span class="passwordIcon">
+                <mat-icon (click)="hide=!hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </span>
+        <div *ngIf="submitted && formValue.password.errors" class="invalid-feedback">
+            <div *ngIf="formValue.password.errors.required">Password is required</div>
+            <div *ngIf="formValue.password.errors.minlength">Password must be at least 6 characters</div>
+        </div>
+    </div>
+    <div class="container-form-btn">
+        <button class="login-form-btn">
+            Register
+        </button>
+        <button class="btn btn-secondary" type="reset" (click)="onReset()">Reset</button>
+        <p class="loginhere">Have Already an account?<a routerLink="/login" class="loginhere-link">Login here</a></p>
+    </div>  
+</form>
+</div>
+</div>
+</div>

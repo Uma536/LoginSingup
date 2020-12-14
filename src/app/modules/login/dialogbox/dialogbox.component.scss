@@ -1,0 +1,21 @@
+    .btn{
+        justify-content: flex-end;
+      .btn-types{
+        border: none;
+        color: white;
+        border-radius:25px;
+        padding: 10px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        margin: 4px 2px;
+        cursor: pointer;
+        &:nth-child(1){
+            background-color:lightgray;
+        }
+        &:nth-child(2){
+            background-color:red;
+        }
+      }
+    }

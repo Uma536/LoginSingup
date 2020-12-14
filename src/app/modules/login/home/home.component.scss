@@ -1,0 +1,40 @@
+
+.mattable-container{
+    width:100%;
+    overflow-x:auto;
+}
+.mat-elevation-z8 {
+    width: 100%;
+  }
+  .logout{
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      button{
+          display: flex;
+          align-items: center;
+      }
+  }
+  .mat-toolbar {
+    background: none !important;
+    color: rgba(0,0,0,.87);
+}
+.userdetails{
+    text-align: center;
+    font-size:14px;
+}
+.userlist{
+    padding-left:30px;
+}
+.spinner {
+    position: fixed;
+    z-index: 999;
+    height: 2em;
+    width: 2em;
+  overflow: visible;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}

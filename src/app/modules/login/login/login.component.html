@@ -1,0 +1,46 @@
+<div class="limiter">
+    <div class="container">
+        <div class="login-card">
+            <div class="login-image">
+                <img src="assets/loginimage.png">
+            </div>
+            <form [formGroup]="loginForm" class="login-form" (ngSubmit)="onSubmit()">
+                <span class="login-form-title">
+                    Member Login
+                </span>
+                <div class="form-fields">
+                    <input type="text" formControlName="username" class="inputname" placeholder="Username" [ngClass]="{ 'is-invalid': submitted && formValue.username.errors }" />
+                    <span class="focus-inputname"></span>
+                    <span class="symbol-inputname">
+                        <mat-icon aria-hidden="false">account_circle</mat-icon>
+                    </span>
+                    <div *ngIf="submitted && formValue.username.errors" class="invalid-feedback">
+                        <div *ngIf="formValue.username.errors.required">Username is required</div>
+                    </div>
+                </div>
+                <div class="form-fields">
+                    <input type="password" formControlName="password" class="inputname" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && formValue.password.errors }" />
+                    <span class="focus-inputname"></span>
+                    <span class="symbol-inputname">
+                        <mat-icon aria-hidden="false">lock</mat-icon>
+                    </span>
+                    <div *ngIf="submitted && formValue.password.errors" class="invalid-feedback">
+                        <div *ngIf="formValue.password.errors.required">Password is required</div>
+                    </div>
+                </div>
+                <div class="container-form-btn">
+                    <button class="login-form-btn" routerLink="/home">
+                        Login
+                    </button>
+                </div>
+                <div class="text-center p-t-136">
+                    <a routerLink="/signup" class="txt2 right-arrow">
+                        Create your Account
+                        <mat-icon>arrow_right_alt</mat-icon>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
