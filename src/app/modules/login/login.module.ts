@@ -26,6 +26,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { UserlistComponent } from './userlist/userlist.component';
 
 
 
@@ -41,7 +42,8 @@ const routes: Routes = [
 
 ];
 @NgModule({
-  declarations: [LoginComponent, SingupComponent, HomeComponent, DialogboxComponent, EditProfileComponent, PagenotfoundComponent],
+  // tslint:disable-next-line:max-line-length
+  declarations: [LoginComponent, SingupComponent, HomeComponent, DialogboxComponent, EditProfileComponent, PagenotfoundComponent, UserlistComponent],
   imports: [
     CommonModule,
     MatCardModule,

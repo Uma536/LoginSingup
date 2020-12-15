@@ -13,11 +13,12 @@
       button{
           display: flex;
           align-items: center;
+          padding-right: 13px;
       }
   }
   .mat-toolbar {
-    background: none !important;
-    color: rgba(0,0,0,.87);
+    color:lightblue;
+    margin-bottom: 40px;
 }
 .userdetails{
     text-align: center;

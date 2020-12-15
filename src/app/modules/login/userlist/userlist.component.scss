@@ -1,0 +1,17 @@
+.mat-elevation-z8 {
+    width: 100%;
+  }
+  .logout{
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      button{
+          display: flex;
+          align-items: center;
+          padding-right: 13px;
+      }
+  }
+  .mattable-container{
+    width:100%;
+    overflow-x:auto;
+}

@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogboxComponent } from '../dialogbox/dialogbox.component';
 import { MatTableDataSource } from '@angular/material/table';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -15,9 +16,10 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  showSpinner = false;
 
+  isTableHasData = true;
   currentUser: User;
+   list: Observable<any[]>
   // tslint:disable-next-line:semicolon
    users = [];
   // users: User[];
@@ -45,7 +47,7 @@ export class HomeComponent implements OnInit {
     // tslint:disable-next-line:align
     this.userService.getAll()
       // tslint:disable-next-line:whitespace
-      .subscribe(users => { this.dataSource.data = users as User[]; });
+      .subscribe(users => {this.isLoad = false; this.dataSource.data = users as User[]; });
     // tslint:disable-next-line:align
     setTimeout(() => {
       this.isLoad = false;
@@ -68,8 +70,14 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  public doFilter = (value: string) => {
-    this.dataSource.filter = value.trim().toLocaleLowerCase();
+  // tslint:disable-next-line:typedef
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.filteredData.length > 0){
+      this.isTableHasData = true;
+    } else {
+      this.isTableHasData = false;
+    }
   }
 
 }
