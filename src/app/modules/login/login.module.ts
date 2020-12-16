@@ -24,9 +24,12 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import {MatDividerModule} from '@angular/material/divider';
 
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { UserlistComponent } from './userlist/userlist.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
 
 
 
@@ -53,6 +56,7 @@ const routes: Routes = [
     MatFormFieldModule,
     MatIconModule,
     MatSnackBarModule,
+    MatDividerModule,
     FormsModule,
     MatDialogModule,
     MatToolbarModule,
@@ -60,6 +64,8 @@ const routes: Routes = [
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSidenavModule,
+    MatListModule,
     MatProgressSpinnerModule,
     RouterModule.forRoot(routes)
   ],
@@ -69,6 +75,6 @@ const routes: Routes = [
 
     // provider used to create fake backend
     fakeBackendProvider],
-  exports: [RouterModule]
+  exports: [RouterModule, MatDividerModule]
 })
 export class LoginModule { }

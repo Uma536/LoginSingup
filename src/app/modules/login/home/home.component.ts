@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogboxComponent } from '../dialogbox/dialogbox.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +26,9 @@ export class HomeComponent implements OnInit {
   // users: User[];
   isLoad = false;
   displayedColumns: string[] = ['index', 'firstName', 'lastName', 'username', 'email'];
+  @ViewChild('sidenav') sidenav: MatSidenav;
+  isExpanded = true;
+
   // dataSource = new MatTableDataSource(this.users);
   public dataSource = new MatTableDataSource<User>();
   constructor(
@@ -78,6 +82,11 @@ export class HomeComponent implements OnInit {
     } else {
       this.isTableHasData = false;
     }
+  }
+  editUser(user: User): void {
+    localStorage.removeItem("editUserId");
+    localStorage.setItem('users', user.id.toString());
+    this.router.navigate(['editprofile']);
   }
 
 }
