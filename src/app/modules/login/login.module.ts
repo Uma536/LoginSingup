@@ -1,7 +1,8 @@
+import { UserserviceResolver } from './userservice.resolver';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import {MatCardModule} from '@angular/material/card';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SingupComponent } from './singup/singup.component';
@@ -25,34 +26,47 @@ import { MatInputModule } from '@angular/material/input';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatSortModule} from '@angular/material/sort';
 
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { UserlistComponent } from './userlist/userlist.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import {MatRippleModule} from '@angular/material/core';
 
 
 
 const routes: Routes = [
 
-  { path: 'home', component: HomeComponent, canActivate: [LoginGuard] },
+  { path: 'home', component: HomeComponent, canActivate: [LoginGuard]},
+    {
+       path: 'editprofile/:id',
+      component: EditProfileComponent,
+   resolve: {
+   userDetails: UserserviceResolver
+ }
+    },
   { path: 'login', component: LoginComponent},
   { path: 'signup', component: SingupComponent},
-  { path: 'editprofile/:id', component: EditProfileComponent},
+  // { path: 'editprofile/:id', component: EditProfileComponent},
    // otherwise redirect to home
    { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: PagenotfoundComponent },  // Wildcard route for a 404 page
 
 ];
+	
 @NgModule({
   // tslint:disable-next-line:max-line-length
-  declarations: [LoginComponent, SingupComponent, HomeComponent, DialogboxComponent, EditProfileComponent, PagenotfoundComponent, UserlistComponent],
+  declarations: [LoginComponent, SingupComponent, HomeComponent, DialogboxComponent, EditProfileComponent, PagenotfoundComponent, UserlistComponent, SidenavComponent],
   imports: [
     CommonModule,
     MatCardModule,
+    MatRippleModule,
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
+    MatSortModule,
     MatFormFieldModule,
     MatIconModule,
     MatSnackBarModule,
@@ -72,6 +86,14 @@ const routes: Routes = [
   providers: [AuthenticationService, UserService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    {
+      provide: 'userDetails',
+      useValue: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => routes
+    },
+    // {
+    //   provide: 'userDetails',
+    //   useValue: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) =>  Routes,
+    // }
 
     // provider used to create fake backend
     fakeBackendProvider],

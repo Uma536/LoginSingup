@@ -10,6 +10,8 @@ import { DialogboxComponent } from '../dialogbox/dialogbox.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { MatSidenav } from '@angular/material/sidenav';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-home',
@@ -20,42 +22,66 @@ export class HomeComponent implements OnInit {
 
   isTableHasData = true;
   currentUser: User;
-   list: Observable<any[]>
+  list: Observable<any[]>
   // tslint:disable-next-line:semicolon
-   users = [];
-  // users: User[];
-  isLoad = false;
+  //users = [];
+  users: User[];
+  isLoadingResults = true;
+
   displayedColumns: string[] = ['index', 'firstName', 'lastName', 'username', 'email'];
   @ViewChild('sidenav') sidenav: MatSidenav;
-  isExpanded = true;
 
+  isExpanded = true;
+ 
   // dataSource = new MatTableDataSource(this.users);
+  // tslint:disable-next-line:new-parens
   public dataSource = new MatTableDataSource<User>();
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
+
+
+  // tslint:disable-next-line:typedef
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort; 
+    
+    console.log("datasource in home",this.dataSource)
+  }
+
   constructor(
     private authenticationService: AuthenticationService,
     private userService: UserService,
     private router: Router,
     public dialog: MatDialog,
-  )
-  {
+  ) {
     this.currentUser = this.authenticationService.currentUserValue;
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
+
+
   // tslint:disable-next-line:typedef
   ngOnInit() {
     this.loadAllUsers();
+  
   }
+
   // tslint:disable-next-line:typedef
   private loadAllUsers() {
-    this.isLoad = true;
+
+    this.isLoadingResults = true;
     // tslint:disable-next-line:align
     this.userService.getAll()
       // tslint:disable-next-line:whitespace
-      .subscribe(users => {this.isLoad = false; this.dataSource.data = users as User[]; });
+      .subscribe(users => {
+        this.isLoadingResults = false;
+        this.dataSource = new MatTableDataSource(users);
+      });
+
     // tslint:disable-next-line:align
     setTimeout(() => {
-      this.isLoad = false;
-    }, 1000);
+      this.isLoadingResults = false;
+
+    }, 3000);
   }
   confirmationDialogbox(): void {
     const dialogRef = this.dialog.open(DialogboxComponent, {
@@ -77,16 +103,11 @@ export class HomeComponent implements OnInit {
   // tslint:disable-next-line:typedef
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.filteredData.length > 0){
+    if (this.dataSource.filteredData.length > 0) {
       this.isTableHasData = true;
     } else {
       this.isTableHasData = false;
     }
-  }
-  editUser(user: User): void {
-    localStorage.removeItem("editUserId");
-    localStorage.setItem('users', user.id.toString());
-    this.router.navigate(['editprofile']);
   }
 
 }

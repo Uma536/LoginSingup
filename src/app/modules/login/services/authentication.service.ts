@@ -6,10 +6,12 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { User } from '../../user';
 import { environment } from 'src/environments/environment.prod';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
+  
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
@@ -43,9 +45,10 @@ logout() {
   localStorage.removeItem('currentUser');
   this.currentUserSubject.next(null);
 }
-// tslint:disable-next-line:typedef
+
 update(id, params) {
-  return this.http.put(`${environment.apiUrl}/users/${id}`, params)
+  // tslint:disable-next-line:whitespace
+  return this.http.put(`${environment.apiUrl}/users` + '/' +id, params)
       .pipe(map(x => {
           // update stored user if the logged in user updated their own record
           if (id === this.currentUserValue.id) {
@@ -59,4 +62,7 @@ update(id, params) {
           return x;
       }));
 }
+// updateUser(user: User) {
+//   return this.http.put(`${environment.apiUrl}/users` + '/' + user.id, user);
+// }
 }

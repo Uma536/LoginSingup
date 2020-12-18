@@ -18,9 +18,10 @@ export class UserService {
 register(user: User) {
   return this.http.post(`${environment.apiUrl}/users/register`, user);
 }
-// tslint:disable-next-line:typedef
+
+
 getUserById(id: string) {
-  return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
+  return this.http.get<User>(`${environment.apiUrl}/users` + '/' +id);
 }
 
 

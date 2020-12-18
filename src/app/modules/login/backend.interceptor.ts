@@ -87,7 +87,7 @@ console.log("the request",request)
     function getUserById() {
       if (!isLoggedIn()) { return unauthorized(); }
 
-      const user = users.find(x => x.id === idFromUrl());
+      const user = users.find(user => user.id === idFromUrl());
       return ok(user);
     }
     // tslint:disable-next-line:typedef
