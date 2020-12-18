@@ -1,9 +1,10 @@
+
 import { UserserviceResolver } from './userservice.resolver';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { RouterModule, Routes, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import {MatCardModule} from '@angular/material/card';
+
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SingupComponent } from './singup/singup.component';
 import { AuthenticationService } from './services/authentication.service';
@@ -14,26 +15,12 @@ import { JwtInterceptor } from './jwt.interceptor';
 import { ErrorInterceptor } from './error.interceptor';
 import { fakeBackendProvider } from './backend.interceptor';
 import { LoginGuard } from './login.guard';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatIconModule} from '@angular/material/icon';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatDialogModule} from '@angular/material/dialog';
 import { DialogboxComponent } from './dialogbox/dialogbox.component';
-import {MatTableModule} from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import { MatInputModule } from '@angular/material/input';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatSortModule} from '@angular/material/sort';
-
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { UserlistComponent } from './userlist/userlist.component';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import {MatListModule} from '@angular/material/list';
 import { SidenavComponent } from './sidenav/sidenav.component';
-import {MatRippleModule} from '@angular/material/core';
+import { MaterialDependenciesModule } from 'src/app/material-dependencies/material-dependencies.module';
 
 
 
@@ -61,26 +48,11 @@ const routes: Routes = [
   declarations: [LoginComponent, SingupComponent, HomeComponent, DialogboxComponent, EditProfileComponent, PagenotfoundComponent, UserlistComponent, SidenavComponent],
   imports: [
     CommonModule,
-    MatCardModule,
-    MatRippleModule,
+    MaterialDependenciesModule,
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    MatSortModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatSnackBarModule,
-    MatDividerModule,
     FormsModule,
-    MatDialogModule,
-    MatToolbarModule,
-    MatPaginatorModule,
-    MatTableModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSidenavModule,
-    MatListModule,
-    MatProgressSpinnerModule,
     RouterModule.forRoot(routes)
   ],
   providers: [AuthenticationService, UserService,
@@ -90,13 +62,8 @@ const routes: Routes = [
       provide: 'userDetails',
       useValue: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => routes
     },
-    // {
-    //   provide: 'userDetails',
-    //   useValue: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) =>  Routes,
-    // }
-
     // provider used to create fake backend
     fakeBackendProvider],
-  exports: [RouterModule, MatDividerModule]
+  exports: [RouterModule]
 })
 export class LoginModule { }
